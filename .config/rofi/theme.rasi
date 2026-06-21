@@ -1,0 +1,63 @@
+* {
+  bg: rgba(10, 10, 10, 0.85);
+  bg-alt: rgba(25, 25, 25, 0.85);
+  fg: #e5e5e5;
+  selected: #ffffff;
+  border: #404040;
+}
+
+window {
+    width: 28%;
+    location: center;
+    anchor: center;
+    background-color: @bg;
+
+    border: 1px;
+    border-color: @border;
+
+    border-radius: 14px;
+    padding: 12px;
+
+}
+
+mainbox {
+    spacing: 8px;
+}
+
+inputbar {
+    background-color: transparent;
+    padding: 6px;
+}
+
+prompt {
+    enabled: false;
+}
+
+entry {
+    placeholder: "Buscar...";
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    spacing: 4px;
+    scrollbar: false;
+    background-color: transparent;
+}
+
+element {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+element selected {
+    background-color: @bg-alt;
+}
+
+element-icon {
+    size: 28px;
+}
+
+element-text {
+    ext-color: @fg;
+}

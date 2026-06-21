@@ -1,0 +1,111 @@
+configuration {
+    modi:                       "drun,run";
+    show-icons:                 true;
+    display-drun:               " ";
+    display-run:                " ";
+    drun-display-format:        "{name}";
+    font:                       "Iosevka Nerd Font 11";
+}
+
+* {
+    /* Paleta Monocromática Minimalista */
+    bg-alpha:                    rgba(20, 20, 20, 0.85);
+    bg-selected:                 rgba(255, 255, 255, 0.1);
+    fg-main:                     #E0E0E0;
+    fg-muted:                    #888888;
+    border-color:                #444444;
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       600px;
+    x-offset:                    0px;
+    y-offset:                    -150px; /* Un toque arriba del centro, estilo Spotlight */
+
+    enabled:                     true;
+    border:                      1px;
+    border-color:                @border-color;
+    border-radius:               12px;
+    background-color:            @bg-alpha;
+    cursor:                      "default";
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     15px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    padding:                     10px;
+    border-radius:               8px;
+    background-color:            rgba(255, 255, 255, 0.03);
+    text-color:                  @fg-main;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @fg-muted;
+}
+
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  @fg-main;
+    cursor:                      "text";
+    placeholder:                 "Buscar aplicaciones...";
+    placeholder-color:           @fg-muted;
+}
+
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       6;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     5px;
+    background-color:            transparent;
+}
+
+element {
+    enabled:                     true;
+    spacing:                     12px;
+    padding:                     8px;
+    border-radius:               6px;
+    background-color:            transparent; /* Fondo transparente por defecto */
+    text-color:                  @fg-muted;   /* Texto gris apagado/sutil cuando no está seleccionado */
+    cursor:                      pointer;
+}
+
+element selected.normal {
+    background-color:            @bg-selected; /* El sutil blanco/gris con opacidad */
+    text-color:                  #FFFFFF;      /* Texto blanco puro para resaltar */
+}
+
+element-icon {
+    background-color:            transparent;
+    size:                        24px;
+    cursor:                      inherit;
+}
+
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

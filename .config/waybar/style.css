@@ -1,0 +1,83 @@
+/* Importamos la fuente normal para que los iconos tengan su tamaño real y no se compriman */
+* {
+    font-family: "Iosevka Nerd Font", "Iosevka Nerd Font Mono";
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+}
+
+window#waybar {
+    background: rgba(15, 15, 15, 0.95);
+    border-bottom: 1px solid #222222;
+    color: #E0E0E0;
+}
+
+/* --- WORKSPACES --- */
+#workspaces {
+    margin-left: 12px;
+}
+
+#workspaces button {
+    color: #666666;
+    padding: 0 14px;
+    margin: 6px 2px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+#workspaces button.active {
+    color: #FFFFFF;
+    background: #262626;
+}
+
+#workspaces button:hover {
+    color: #FFFFFF;
+    background: #1A1A1A;
+}
+
+/* --- CENTER (RELOJ / FECHA) --- */
+#custom-date {
+    color: #FFFFFF;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* --- RIGHT MODULES (ESTILO CONTENEDOR MONOCROMO) --- */
+#cpu,
+#custom-gpu,
+#memory,
+#network,
+#pulseaudio,
+#custom-notifications {
+    font-family: "Iosevka Nerd Font";
+    font-size: 15px; /* Subimos el tamaño general para que el ICONO respire y crezca */
+    padding: 0 16px;
+    color: #CCCCCC;
+    /* Separador sutil a la izquierda de cada módulo */
+    border-left: 1px solid #262626; 
+}
+
+#cpu text,
+#custom-gpu text,
+#memory text,
+#network text,
+#pulseaudio text {
+    font-size: 13.5px; /* El texto se achica, pero el icono se mantiene en 16px */
+    font-weight: 500;
+}
+
+/* El último módulo (notificaciones) no necesita tanto padding a la derecha */
+#custom-notifications {
+    padding-right: 10px;
+    color: #A0A0A0;
+}
+
+/* Hover sutil para los módulos que tienen interacción técnica */
+#cpu:hover,
+#custom-notifications:hover {
+    background: #1A1A1A;
+    color: #FFFFFF;
+}
