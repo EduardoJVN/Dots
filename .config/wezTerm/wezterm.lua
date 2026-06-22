@@ -1,105 +1,80 @@
 local wezterm = require("wezterm")
-local config = wezterm.config_builder() -- Usamos el builder moderno
+local config = wezterm.config_builder() -- Generador de configuración moderno
 
--- 1. FONT (Descomenta esto después de instalar la Nerd Font)
+-- =============================================================================
+-- 1. TIPOGRAFÍA Y FUENTES
+-- =============================================================================
 config.font = wezterm.font("Iosevka Nerd Font")
 config.font_size = 14.0
 
--- 2. WINDOW & ESTHETICS (Optimizado para KDE Plasma)
-config.window_background_opacity = 0.50
-config.macos_window_background_blur = 30 -- En KDE con Wayland esto ayuda al desenfoque
-config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+-- =============================================================================
+-- 2. ESTÉTICA Y RENDERIZADO VISUAL
+-- =============================================================================
+config.window_background_opacity = 0.50          -- 50% Transparente (Aprovecha el blur de Hyprland)
+config.window_padding = { left = 8, right = 8, top = 8, bottom = 8 } -- Pequeño colchón interno para el código
 config.initial_cols = 150
 config.initial_rows = 40
-config.window_decorations = "NONE"
--- config.start_as = "Normal"
--- config.window_decorations = "RESIZE" -- Look ultra limpio sin barra de título
+config.window_decorations = "NONE"               -- Elimina barras de título nativas
 
--- 3. PERFORMANCE (Aprovechando tu GPU/CPU)
-config.max_fps = 240
+-- =============================================================================
+-- 3. RENDIMIENTO EXTREMO (Aprovechamiento de Hardware)
+-- =============================================================================
+config.max_fps = 240                             -- Sincroniza sobre el techo de tus 165Hz
 config.term = "wezterm"
-config.enable_kitty_graphics = true
-config.animation_fps = 120 -- Animaciones fluidas para el cursor
+config.enable_kitty_graphics = true              -- Soporte nativo para previsualizar imágenes en terminal
+config.animation_fps = 120                       -- Suavizado de transiciones del cursor
 
--- 4. CURSOR (Estilo Jarvis)
-config.default_cursor_style = "SteadyBar" -- Una barra fina es más moderna para desarrollo web
+-- =============================================================================
+-- 4. CURSOR (Estilo Minimalista/Desarrollo)
+-- =============================================================================
+config.default_cursor_style = "SteadyBar"        -- Barra fina vertical, ideal para picar código
 config.cursor_blink_rate = 500
 
--- 5. COLORES (Manteniendo tu estilo Gentleman pero con retoques)
+-- =============================================================================
+-- 5. PALETA DE COLORES (Estilo Gentleman Modificado)
+-- =============================================================================
 config.colors = {
     foreground = "#f3f6f9",
-    background = "#06080f", -- Negro profundo
-    cursor_bg = "#e0c15a",
+    background = "#06080f",                     -- Negro profundo
+    cursor_bg = "#e0c15a",                       -- Dorado Jarvis
     cursor_fg = "#06080f",
-    selection_bg = "#263356",
+    selection_bg = "#263356",                    -- Contraste de selección azulado
     ansi = { "#06080f", "#cb7c94", "#b7cc85", "#ffe066", "#7fb4ca", "#ff8dd7", "#7aa89f", "#f3f6f9" },
     brights = { "#8a8fa3", "#de8fa8", "#d1e8a9", "#fff7b1", "#a3d4d5", "#ffaeea", "#7fb4ca", "#f3f6f9" },
 }
 
--- 6. INPUT
-config.use_dead_keys = true
+-- =============================================================================
+-- 6. INTERFACES DE ENTRADA Y SHORTCUTS (Multiplexor de Paneles)
+-- =============================================================================
+config.use_dead_keys = true                      -- Mantiene el soporte nativo para acentos en español
 
 config.keys = {
-  -- Dividir horizontalmente (una al lado de la otra) con ALT + h
-  {
-    key = 'h',
-    mods = 'ALT',
-    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
-  },
-  -- Dividir verticalmente (una arriba y otra abajo) con ALT + v
-  {
-    key = 'v',
-    mods = 'ALT',
-    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
-  },
-  -- Cerrar el panel actual con ALT + w
-  {
-    key = 'w',
-    mods = 'ALT',
-    action = wezterm.action.CloseCurrentPane { confirm = true },
-  },
-  -- Moverse entre paneles usando ALT + flechas
+  -- Dividir panel horizontalmente (Lado a lado) con ALT + H
+  { key = 'h', mods = 'ALT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
+  
+  -- Dividir panel verticalmente (Arriba y abajo) con ALT + V
+  { key = 'v', mods = 'ALT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+  
+  -- Cerrar el panel enfocado con ALT + W (Pide confirmación si hay procesos activos)
+  { key = 'w', mods = 'ALT', action = wezterm.action.CloseCurrentPane { confirm = true } },
+
+  -- Moverse entre paneles usando ALT + Flechas Direccionales
   { key = 'LeftArrow',  mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Left' },
   { key = 'RightArrow', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Right' },
   { key = 'UpArrow',    mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Up' },
   { key = 'DownArrow',  mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Down' },
+
+  -- Opcional (Comentado): Moverse entre paneles usando la fila Vim (ALT + H,J,K,L)
+  -- Descómentalo si querés unificar la transición con las teclas de Hyprland
+  -- { key = 'h', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Left' },
+  -- { key = 'l', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Right' },
+  -- { key = 'k', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Up' },
+  -- { key = 'j', mods = 'ALT', action = wezterm.action.ActivatePaneDirection 'Down' },
 }
 
-
--- Función para formatear la barra de estado
-wezterm.on('update-status', function(window, pane)
-  -- Formateamos la hora y fecha
-  local date = wezterm.strftime('%H:%M  %d-%b')
-
-  -- Construimos la barra con segmentos de colores
-  window:set_right_status(wezterm.format({
-    -- Segmento 1: Usuario/PC (Color Cian de tu tema)
-    { Foreground = { Color = '#7aa89f' } },
-    { Text = '   ' .. wezterm.hostname() .. '  ' },
-    
-    -- Segmento 2: Fecha (Color Amarillo de tu tema)
-    { Foreground = { Color = '#e0c15a' } },
-    { Text = '  󰃭  ' .. date .. '  ' },
-
-    -- Segmento 3: Indica si el Bloq Mayús está activo (Útil para programar)
-    { Foreground = { Color = '#cb7c94' } },
-    { Text = '  ' .. (window:get_dimensions().is_full_screen and '󰊓 ' or '') .. ' ' },
-  }
-))
-end)
-
--- Forzamos a que la barra esté siempre visible, aunque haya una sola pestaña
-config.hide_tab_bar_if_only_one_tab = false
-
--- La ponemos abajo para que se sienta como tmux
-config.tab_bar_at_bottom = false
-
--- Usamos la barra simple (retro) que es mucho más personalizable
-config.use_fancy_tab_bar = false
-
--- muestra el tab
-config.show_tabs_in_tab_bar = false
-
+-- =============================================================================
+-- 7. PESTAÑAS (Desactivadas para maximalizar el espacio de código limpio)
+-- =============================================================================
 config.enable_tab_bar = false
 
 return config

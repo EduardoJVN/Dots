@@ -1,8 +1,9 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Arquitectura visual de la línea de comandos (Módulos encadenados en píldoras)
 format = """
 [░▒▓](#a3aed2)\
-[  ](bg:#a3aed2 fg:#090c0c)\
+[  ](bg:#a3aed2 fg:#090c0c)\
 [](bg:#769ff0 fg:#a3aed2)\
 $directory\
 [](fg:#769ff0 bg:#394260)\
@@ -22,9 +23,10 @@ $time\
 [directory]
 style = "fg:#e3e5e5 bg:#769ff0"
 format = "[ $path ]($style)"
-truncation_length = 3
+truncation_length = 3            # Si la ruta es muy larga, colapsa a partir del 3er subdirectorio
 truncation_symbol = "…/"
 
+# Iconos limpios para las carpetas del sistema más comunes
 [directory.substitutions]
 "Documents" = "󰈙 "
 "Downloads" = " "
@@ -40,6 +42,7 @@ format = '[[ $symbol $branch ](fg:#769ff0 bg:#394260)]($style)'
 style = "bg:#394260"
 format = '[[($all_status$ahead_behind )](fg:#769ff0 bg:#394260)]($style)'
 
+# --- ENTORNOS DE LENGUAJES (Aparecen dinámicamente si estás en la carpeta de un proyecto) ---
 [nodejs]
 symbol = ""
 style = "bg:#212736"
@@ -67,49 +70,10 @@ format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
 
 [time]
 disabled = false
-time_format = "%R" # Hour:Minute Format
+time_format = "%R"               # Formato de 24 horas (HH:MM)
 style = "bg:#1d2230"
 format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
 
-[os]
-disabled = false
-style = "bg:#a3aed2 fg:#090c0c"
-format = "[ $symbol ]($style)"
-
-[os.symbols]
-Alpaquita = ""
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = ""
-Artix = ""
-CentOS = ""
-Debian = ""
-Fedora = ""
-FreeBSD = ""
-Garuda = ""
-Gentoo = ""
-HardenedBSD = "󰞇"
-Illumos = "󰈸"
-Linux = "" # <--- Este es el clásico Tux
-Mabox = ""
-Macos = ""
-Manjaro = ""
-Mariner = ""
-MidnightBSD = ""
-Mint = ""
-NetBSD = ""
-NixOS = ""
-OpenBSD = "󰈺"
-openSUSE = ""
-Oracle = "󠊠"
-Pop = ""
-Raspbian = ""
-Redhat = ""
-RedHatEnterprise = ""
-Redox = "󰀘"
-Solus = ""
-SUSE = ""
-Ubuntu = ""
-Unknown = ""
-Windows = "󰍲"
+[character]
+success_symbol = "[❯](bold #7aa89f)" # Indicador verde pastel si el último comando terminó bien
+error_symbol = "[❯](bold #cb7c94)"   # Indicador rojo/rosa si el comando falló (Ideal para debugging)

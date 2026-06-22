@@ -51,6 +51,11 @@ window#waybar {
 #memory,
 #network,
 #pulseaudio,
+#bluetooth,
+#custom-cachy-update,
+#custom-weather,
+#tray,
+#custom-backlight,
 #custom-notifications {
     font-family: "Iosevka Nerd Font";
     font-size: 15px; /* Subimos el tamaño general para que el ICONO respire y crezca */
@@ -64,6 +69,8 @@ window#waybar {
 #custom-gpu text,
 #memory text,
 #network text,
+#bluetooth text,
+#custom-cachy-update text,
 #pulseaudio text {
     font-size: 13.5px; /* El texto se achica, pero el icono se mantiene en 16px */
     font-weight: 500;
@@ -80,4 +87,10 @@ window#waybar {
 #custom-notifications:hover {
     background: #1A1A1A;
     color: #FFFFFF;
+}
+
+#custom-cachy-update.pending {
+    /* color: #00cc99; El verde característico de CachyOS */
+    color: #FA3102; 
+    font-weight: bold;
 }

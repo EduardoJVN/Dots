@@ -17,8 +17,11 @@
     "custom/gpu",
     "memory",
     "network",
-    // "bluetooth",
+    "bluetooth",
     "pulseaudio",
+    "custom/weather",
+    "tray",
+    "custom/cachy-update",
     "custom/notifications"
   ],
 
@@ -57,11 +60,11 @@
   },
 
   "network": {
-    "format-wifi": "󰖩 ",
-    "format-ethernet": "󰈀 ",
-    "format-disconnected": "󰖪 ",
-    "tooltip-format": "{ifname} via {gwaddr}",
-    "tooltip-format-wifi": "SSID: {essid}\nSeñal: {signalStrength}%"
+    "format-wifi": "󰖩  {essid}",
+    "format-ethernet": "󰈀  wired",
+    "format-disconnected": "󰖪  disconnected",
+    "tooltip-format": "IP: {ipaddr}",
+    "on-click": "wezterm start nmtui"
   },
 
   "bluetooth": {
@@ -71,11 +74,20 @@
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "on-click": "wezterm -e bluetui" // Interfaz TUI para emparejar dispositivos
+    "on-click": "wezterm start bluetui"
   },
 
   "pulseaudio": {
-    "format": "󰕾  {volume}%",
+    "format": "{icon} {volume}%",
+    "format-icons": {
+        "headphone": "",
+        "hands-free": "󱡒",
+        "headset": "󰋎",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+    },
     "format-muted": "󰖁 ",
     "max-volume": 100,
     "tooltip": false,
@@ -83,12 +95,42 @@
     "scroll-step": 5,
     /* Mapeo manual de acciones para asegurar que WirePlumber respete el límite */
     "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
+    "on-click": "pavucontrol"
   },
 
   "custom/notifications": {
     "format": "󰂚 ",
     "tooltip": false,
     "on-click": "swaync-client -t"
+  },
+  "custom/cachy-update": {
+    "format": "{}",
+    "interval": 1800,
+    "exec": "~/.config/waybar/scripts/check_updates.sh",
+    "return-type": "json", // <--- CLAVE: Esto le permite entender las clases
+    "on-click": "konsole -e cachy-update", 
+    "tooltip": true,
+    "tooltip-format": "Actualizaciones de CachyOS"
+  },
+  "custom/weather": {
+    "format": "{}",
+    "tooltip": true,
+    "interval": 1800, // Se actualiza cada 30 minutos para no saturar wttr.in
+    "exec": "~/.config/waybar/scripts/weather.sh",
+    "return-type": "json",
+    "on-click": "true" // Al asignarle una acción (aunque sea un 'true' que no hace nada), GTK cambia el cursor a la mano automáticamente
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+  "custom/backlight": {
+    "format": "☀️ {percentage}%",
+    "exec": "brightnessctl -m | cut -d, -f4 | tr -d '%'",
+    "interval": 5,
+    "on-click-right": "gsettings set org.gnome.desktop.interface color-scheme $(gsettings get org.gnome.desktop.interface color-scheme | grep -q 'dark' && echo 'prefer-light' || echo 'prefer-dark')",
+    "tooltip": true,
+    "tooltip-format": "Click Derecho: Cambiar Tema (Claro/Oscuro)"
   }
 }
