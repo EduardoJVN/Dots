@@ -1,19 +1,26 @@
 configuration {
     modi:                       "drun,run";
-    show-icons:                 true;
-    display-drun:               " ";
-    display-run:                " ";
-    drun-display-format:        "{name}";
-    font:                       "Iosevka Nerd Font 11";
+    show-icons:                  true;
+    display-drun:                " ";
+    display-run:                 " ";
+    drun-display-format:         "{name}";
+    font:                        "Iosevka Nerd Font 11";
 }
 
 * {
     /* Paleta Monocromática Minimalista */
-    bg-alpha:                    rgba(20, 20, 20, 0.85);
-    bg-selected:                 rgba(255, 255, 255, 0.1);
-    fg-main:                     #E0E0E0;
+    bg:                          rgba(15, 15, 15, 0.85);
+    /* ⚪ Totalmente blanco */
+    bg-alt:                      #ffffff;   
+    /* 👈 CAMBIAR ACÁ: Volvemos al gris translúcido */
+    /*bg-alt:                      rgba(255, 255, 255, 0.08);*/
+    fg:                          #e5e5e5;
     fg-muted:                    #888888;
-    border-color:                #444444;
+    /* 🌑 Texto oscuro para resaltar sobre el fondo blanco */
+    selected:                    #111111;   
+    /* 👈 CAMBIAR ACÁ: Volvemos al texto blanco puro */
+    /*selected:                    #ffffff;*/   
+    border-color:                #333333;
 }
 
 window {
@@ -21,22 +28,21 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       600px;
-    x-offset:                    0px;
-    y-offset:                    -150px; /* Un toque arriba del centro, estilo Spotlight */
-
+    width:                       550px;
+    y-offset:                    -100px;
+    
     enabled:                     true;
     border:                      1px;
     border-color:                @border-color;
-    border-radius:               12px;
-    background-color:            @bg-alpha;
+    border-radius:               14px;
+    background-color:            @bg;
+    padding:                     12px;
     cursor:                      "default";
 }
 
 mainbox {
     enabled:                     true;
     spacing:                     10px;
-    padding:                     15px;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
 }
@@ -44,10 +50,10 @@ mainbox {
 inputbar {
     enabled:                     true;
     spacing:                     10px;
-    padding:                     10px;
+    padding:                     10px 14px;
     border-radius:               8px;
     background-color:            rgba(255, 255, 255, 0.03);
-    text-color:                  @fg-main;
+    text-color:                  @fg;
     children:                    [ "prompt", "entry" ];
 }
 
@@ -60,9 +66,9 @@ prompt {
 entry {
     enabled:                     true;
     background-color:            transparent;
-    text-color:                  @fg-main;
+    text-color:                  @fg;
     cursor:                      "text";
-    placeholder:                 "Buscar aplicaciones...";
+    placeholder:                 "Buscar...";
     placeholder-color:           @fg-muted;
 }
 
@@ -76,24 +82,35 @@ listview {
     layout:                      vertical;
     reverse:                     false;
     fixed-height:                true;
-    fixed-columns:               true;
-    spacing:                     5px;
+    spacing:                     6px;
     background-color:            transparent;
+    border:                      0px;
 }
 
+/* --- ESTILIZADO DE FILAS --- */
 element {
     enabled:                     true;
     spacing:                     12px;
-    padding:                     8px;
-    border-radius:               6px;
-    background-color:            transparent; /* Fondo transparente por defecto */
-    text-color:                  @fg-muted;   /* Texto gris apagado/sutil cuando no está seleccionado */
+    padding:                     8px 12px;
+    border-radius:               8px;
+    background-color:            transparent;
+    text-color:                  @fg-muted;
     cursor:                      pointer;
 }
 
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  @fg-muted;
+}
+
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @fg-muted;
+}
+
 element selected.normal {
-    background-color:            @bg-selected; /* El sutil blanco/gris con opacidad */
-    text-color:                  #FFFFFF;      /* Texto blanco puro para resaltar */
+    background-color:            @bg-alt;     /* Seteado al blanco sólido */
+    text-color:                  @selected;   /* Seteado al gris/negro oscuro */
 }
 
 element-icon {
@@ -107,5 +124,4 @@ element-text {
     text-color:                  inherit;
     cursor:                      inherit;
     vertical-align:              0.5;
-    horizontal-align:            0.0;
 }

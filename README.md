@@ -4,3 +4,9 @@ sudo pacman -S hypridle hyprshot hyprsunset wl-clipboard
 brightnessctl
 
 sudo pacman -S xdg-desktop-portal-hyprland
+
+
+
+comandos importantes
+
+reiniciar waybar: killall waybar && waybar &

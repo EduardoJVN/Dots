@@ -1,4 +1,4 @@
-/* Importamos la fuente normal para que los iconos tengan su tamaño real y no se compriman */
+/* Configuración General */
 * {
     font-family: "Iosevka Nerd Font", "Iosevka Nerd Font Mono";
     font-size: 14px;
@@ -9,88 +9,66 @@
     margin: 0;
 }
 
+/* La barra principal ahora es invisible para que floten los módulos */
 window#waybar {
-    background: rgba(15, 15, 15, 0.95);
-    border-bottom: 1px solid #222222;
-    color: #E0E0E0;
+    background: transparent;
 }
 
-/* --- WORKSPACES --- */
-#workspaces {
-    margin-left: 12px;
-}
-
-#workspaces button {
-    color: #666666;
-    padding: 0 14px;
-    margin: 6px 2px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-}
-
-#workspaces button.active {
-    color: #FFFFFF;
-    background: #262626;
-}
-
-#workspaces button:hover {
-    color: #FFFFFF;
-    background: #1A1A1A;
-}
-
-/* --- CENTER (RELOJ / FECHA) --- */
-#custom-date {
-    color: #FFFFFF;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-/* --- RIGHT MODULES (ESTILO CONTENEDOR MONOCROMO) --- */
-#cpu,
-#custom-gpu,
-#memory,
-#network,
-#pulseaudio,
-#bluetooth,
-#custom-cachy-update,
-#custom-weather,
-#tray,
-#custom-backlight,
-#custom-notifications {
-    font-family: "Iosevka Nerd Font";
-    font-size: 15px; /* Subimos el tamaño general para que el ICONO respire y crezca */
-    padding: 0 16px;
-    color: #CCCCCC;
-    /* Separador sutil a la izquierda de cada módulo */
-    border-left: 1px solid #262626; 
-}
-
-#cpu text,
-#custom-gpu text,
-#memory text,
-#network text,
-#bluetooth text,
-#custom-cachy-update text,
-#pulseaudio text {
-    font-size: 13.5px; /* El texto se achica, pero el icono se mantiene en 16px */
-    font-weight: 500;
-}
-
-/* El último módulo (notificaciones) no necesita tanto padding a la derecha */
-#custom-notifications {
-    padding-right: 10px;
-    color: #A0A0A0;
-}
-
-/* Hover sutil para los módulos que tienen interacción técnica */
-#cpu:hover,
-#custom-notifications:hover {
-    background: #1A1A1A;
-    color: #FFFFFF;
-}
 
 #custom-cachy-update.pending {
     /* color: #00cc99; El verde característico de CachyOS */
     color: #FA3102; 
     font-weight: bold;
+}
+
+/* Configuración General */
+
+#workspaces,
+#custom-date,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#custom-cachy-update,
+#custom-weather,
+#tray,
+#custom-notifications {
+    background: #16161a; /* Gris carbón sólido */
+    color: #e0e0e6;
+    padding: 4px 16px;
+    border-radius: 8px; /* Bordes angulares, look industrial */
+    margin: 4px 2px;
+    border: 1px solid #242429;
+}
+
+/* --- WORKSPACES --- */
+#workspaces button {
+    color: #52525b;
+    padding: 0 10px;
+    border-radius: 4px;
+}
+
+#workspaces button.active {
+    color: #16161a;         /* Texto oscuro para que contraste con el fondo claro */
+    background: #ffffff;    /* <-- ACÁ VA TU COLOR SELECCIONADO (Ej: Verde Oliva) */
+    font-weight: bold;
+}
+
+/* --- RELOJ (Centro) --- */
+#custom-date {
+    color: #ffffff;         /* <-- ACÁ VA TU COLOR SELECCIONADO */
+    font-weight: 700;
+}
+
+/* --- HOVER UNIFICADO --- */
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-weather:hover,
+#custom-cachy-update:hover,
+#custom-notifications:hover {
+    background: #ffffff;    /* <-- ACÁ VA TU COLOR SELECCIONADO */
+    color: #16161a;
+    transition: all 0.15s ease;
 }
