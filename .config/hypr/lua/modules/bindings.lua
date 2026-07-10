@@ -7,4 +7,4 @@
 local mod = MAIN_MOD
 
 -- --- 🚀 LANZADORES DE APLICACIONES ---
-hl.bind(MAIN_MOD .. "RETURN", hl.dsp.exec_cmd(TERMINAL))
+hl.bind(MAIN_MOD .. " + RETURN" , hl.dsp.exec_cmd(TERMINAL))
