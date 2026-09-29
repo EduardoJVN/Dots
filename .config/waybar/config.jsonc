@@ -19,7 +19,7 @@
     "custom/weather",
     "cpu",
     "memory",
-    // "network",
+    "network",
     "pulseaudio",
     "tray",
     "custom/cachy-update",
@@ -35,6 +35,7 @@
     "exec": "~/.config/waybar/scripts/date.sh",
     "interval": 60,
     "tooltip": false
+    // "on-click": "ags toggle dialogo-reloj"
   },
 
   "cpu": {
