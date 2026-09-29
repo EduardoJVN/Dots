@@ -49,12 +49,15 @@ hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("LIBVA_DRIVER_NAME", "nvidia")
 -- hl.env("__GL_VRR_ALLOWED", 0) 
 
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+hl.env("NVD_BACKEND", "direct")
+
 
 hl.config({
     misc = {
         force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
-        vrr = 0, --   ontrols the VRR (Adaptive Sync) of your monitors. 0 - off, 1 - on, 2 - fullscreen only, 3 - fullscreen with video or game content type [0/1/2/3]
+        vrr = 3, --   ontrols the VRR (Adaptive Sync) of your monitors. 0 - off, 1 - on, 2 - fullscreen only, 3 - fullscreen with video or game content type [0/1/2/3]
         mouse_move_enables_dpms = true,
         key_press_enables_dpms =  true
     },

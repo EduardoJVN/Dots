@@ -6,4 +6,4 @@
 MAIN_MOD = "SUPER"
 TERMINAL = "wezterm"
 MENU = "rofi -show drun"
-FILE_MANAGER = "dolphin"
+FILE_MANAGER = "thunar"
